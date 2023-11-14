@@ -1,8 +1,5 @@
-
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "program.h"
-
 
 
 
@@ -44,130 +41,119 @@ char String_LightOff[] 			= "Message_LightOff(N,78)\r\n";
 
 char String_StandBy[] 			= "-Stand By\r\n";
 
-
-
-UART_HandleTypeDef huart2;
-
 //Variables
 uint8_t Message;
+
+/* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart2;
+
+
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 
+
 /* Private user code ---------------------------------------------------------*/
 int main(void)
 {
-	  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	  HAL_Init();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-	  /* Configure the system clock */
-	  SystemClock_Config();
+  /* Configure the system clock */
+  SystemClock_Config();
 
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
 
-  /* USER CODE BEGIN SysInit */
+  while (1) {
 
-  /* USER CODE END SysInit */
-
-	  /* Initialize all configured peripherals */
-	  MX_GPIO_Init();
-	  MX_USART2_UART_Init();
-
+ 	   	  HAL_UART_Receive_IT(&huart2, &Message, 1); //Read from Interrupt
 
 
-	  while (1) {
+ 	   	    switch (Message) {
+ 	   	        case (Message_MoveForward):
+ 	   	        	HAL_UART_Transmit(&huart2,&String_MoveForward,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	  HAL_UART_Receive_IT(&huart2, &Message, 1); //Read from Interrupt
+ 	   	        case Message_MoveBack:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_MoveBack,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
+ 	   	        case (Message_MoveLeft):
+ 	   	        	HAL_UART_Transmit(&huart2,&String_MoveLeft,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	    switch (Message) {
-	   	        case (Message_MoveForward):
-	   	        	HAL_UART_Transmit(&huart2,&String_MoveForward,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_MoveRight:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_MoveRight,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_MoveBack:
-	   	        	HAL_UART_Transmit(&huart2,&String_MoveBack,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_RotateBaseLeft:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseLeft,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case (Message_MoveLeft):
-	   	        	HAL_UART_Transmit(&huart2,&String_MoveLeft,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_RotateBaseRight:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseRight,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_MoveRight:
-	   	        	HAL_UART_Transmit(&huart2,&String_MoveRight,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_FirstArmUp:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmUp ,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_RotateBaseLeft:
-	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseLeft,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_FirstArmDown:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmDown,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_RotateBaseRight:
-	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseRight,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_SecondArmUp:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_SecondArmUp,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_FirstArmUp:
-	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmUp ,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_SecondArmDown:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_SecondArmDown,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_FirstArmDown:
-	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmDown,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_SpoonUp:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_SpoonUp,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_SecondArmUp:
-	   	        	HAL_UART_Transmit(&huart2,&String_SecondArmUp,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_SpoonDown:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_SpoonDown,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_SecondArmDown:
-	   	        	HAL_UART_Transmit(&huart2,&String_SecondArmDown,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_LightOn:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_LightOn,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_SpoonUp:
-	   	        	HAL_UART_Transmit(&huart2,&String_SpoonUp,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        case Message_LightOff:
+ 	   	        	HAL_UART_Transmit(&huart2,&String_LightOff,String_Bufforsize,UART_Timeout);
+ 	   	        	Message=0;
+ 	   	            break;
 
-	   	        case Message_SpoonDown:
-	   	        	HAL_UART_Transmit(&huart2,&String_SpoonDown,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	        default:
+ 	   	    	   HAL_UART_Transmit(&huart2,&String_StandBy,sizeof(String_StandBy),UART_Timeout);// Sending in normal mode
+ 	   	      	   break;
 
-	   	        case Message_LightOn:
-	   	        	HAL_UART_Transmit(&huart2,&String_LightOn,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
+ 	   	    }
+ 	   	   HAL_Delay(1000);
+ 	   	//   Eval_LEDTest();
 
-	   	        case Message_LightOff:
-	   	        	HAL_UART_Transmit(&huart2,&String_LightOff,String_Bufforsize,UART_Timeout);
-	   	        	Message=0;
-	   	            break;
-
-	   	        default:
-	   	    	   HAL_UART_Transmit(&huart2,&String_StandBy,sizeof(String_StandBy),UART_Timeout);// Sending in normal mode
-	   	      	   break;
-
-	   	    }
-	   	   HAL_Delay(1000);
-
-	     }
-}
-
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	//  HAL_UART_Receive_IT(&huart1, &rx_buff_string, 1000);
-	//    HAL_UART_Receive_IT(&huart1, rx_buff_int, 100);
-}
+ 	     }
+ }
 
 
 void SystemClock_Config(void)
@@ -218,7 +204,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 9600;;
+  huart2.Init.BaudRate = 38400;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -249,38 +235,27 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7
                           |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
-                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
+                          |GPIO_PIN_12|GPIO_PIN_15, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5|GPIO_PIN_6
                           |GPIO_PIN_7, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PF0 PF1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
   /*Configure GPIO pins : PA0 PA1 PA2 PA3
                            PA4 PA5 PA6 PA7
                            PA8 PA9 PA10 PA11
-                           PA12 PA13 PA14 PA15 */
+                           PA12 PA15 */
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7
                           |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
-                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
+                          |GPIO_PIN_12|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

@@ -1,3 +1,18 @@
+//		*PT8A993A*
+//					_	_	_
+//				1	-|		|-	24
+//	(GND)		2	-|		|-	23
+//				3	-|		|-	22
+//				4	-|		|-	21	(VCC)
+//				5	-|		|-	20	(SecondArm)
+//	(MotorLeft)	6	-|		|-	19	(FirstArm)
+//	(MotorBase)	7	-|		|-	18	(FirstArm)
+//	(MotorLeft)	8	-|		|-	17
+//	(MotorBaseL	9	-|		|-	16
+//				10	-|		|-	15	(SecondArm)
+//				11	-|		|-	14
+//	(MotorRight)12	-|		|-	13	(MotorRight)
+//					_	_	_
 
 
 void Execute_MoveForward(void);
@@ -17,7 +32,6 @@ void Execute_LightOff(void);
 
 
 void Eval_LEDTest(void);
-
 
 
 

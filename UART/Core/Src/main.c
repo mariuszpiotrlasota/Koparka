@@ -76,25 +76,25 @@ int main(void)
  	   	    switch (Message) {
  	   	        case (Message_MoveForward): //A
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveForward,String_Bufforsize,UART_Timeout);
- 	   	        	Motor_LeftForward();
+ 	   	        	Execute_MoveForward();
  	   	        	Message=0;
  	   	            break;
 
  	   	        case Message_MoveBack: //B
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveBack,String_Bufforsize,UART_Timeout);
- 	   	        	Motor_LeftBack();
+ 	   	        	Execute_MoveBack();
  	   	        	Message=0;
  	   	            break;
 
  	   	        case (Message_MoveLeft): //C
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveLeft,String_Bufforsize,UART_Timeout);
- 	   	        	Motor_RightForward();
+ 	   	        	Execute_MoveLeft();
  	   	        	Message=0;
  	   	            break;
 
  	   	        case Message_MoveRight: //D
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveRight,String_Bufforsize,UART_Timeout);
- 	   	        	Motor_RightBack();
+ 	   	        	Execute_MoveRight();
  	   	        	Message=0;
  	   	            break;
 

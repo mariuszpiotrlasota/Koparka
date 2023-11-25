@@ -74,83 +74,87 @@ int main(void)
 
 
  	   	    switch (Message) {
- 	   	        case (Message_MoveForward):
+ 	   	        case (Message_MoveForward): //A
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveForward,String_Bufforsize,UART_Timeout);
+ 	   	        	Motor_LeftForward();
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_MoveBack:
+ 	   	        case Message_MoveBack: //B
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveBack,String_Bufforsize,UART_Timeout);
+ 	   	        	Motor_LeftBack();
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case (Message_MoveLeft):
+ 	   	        case (Message_MoveLeft): //C
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveLeft,String_Bufforsize,UART_Timeout);
+ 	   	        	Motor_RightForward();
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_MoveRight:
+ 	   	        case Message_MoveRight: //D
  	   	        	HAL_UART_Transmit(&huart2,&String_MoveRight,String_Bufforsize,UART_Timeout);
+ 	   	        	Motor_RightBack();
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_RotateBaseLeft:
+ 	   	        case Message_RotateBaseLeft: //E
  	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseLeft,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_RotateBaseRight:
+ 	   	        case Message_RotateBaseRight: //F
  	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseRight,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_FirstArmUp:
+ 	   	        case Message_FirstArmUp: //G
  	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmUp ,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_FirstArmDown:
+ 	   	        case Message_FirstArmDown: //H
  	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmDown,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_SecondArmUp:
+ 	   	        case Message_SecondArmUp: //I
  	   	        	HAL_UART_Transmit(&huart2,&String_SecondArmUp,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_SecondArmDown:
+ 	   	        case Message_SecondArmDown: //J
  	   	        	HAL_UART_Transmit(&huart2,&String_SecondArmDown,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_SpoonUp:
+ 	   	        case Message_SpoonUp: //K
  	   	        	HAL_UART_Transmit(&huart2,&String_SpoonUp,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_SpoonDown:
+ 	   	        case Message_SpoonDown: //L
  	   	        	HAL_UART_Transmit(&huart2,&String_SpoonDown,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_LightOn:
+ 	   	        case Message_LightOn: //M
  	   	        	HAL_UART_Transmit(&huart2,&String_LightOn,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        case Message_LightOff:
+ 	   	        case Message_LightOff: //N
  	   	        	HAL_UART_Transmit(&huart2,&String_LightOff,String_Bufforsize,UART_Timeout);
  	   	        	Message=0;
  	   	            break;
 
- 	   	        default:
+ 	   	        default: //STAND BY
  	   	    	   HAL_UART_Transmit(&huart2,&String_StandBy,sizeof(String_StandBy),UART_Timeout);// Sending in normal mode
  	   	      	   break;
 
  	   	    }
  	   	   HAL_Delay(1000);
- 	   	//   Eval_LEDTest();
+
 
  	     }
  }
@@ -247,6 +251,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5|GPIO_PIN_6
                           |GPIO_PIN_7, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_0, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PA0 PA1 PA2 PA3
                            PA4 PA5 PA6 PA7

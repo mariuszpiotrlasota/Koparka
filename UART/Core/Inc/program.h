@@ -33,6 +33,12 @@
 
 
 //Funkcje
+void Motor_LeftForward(void);
+void Motor_LeftBack(void);
+void Motor_RightForward(void);
+void Motor_RightBack(void);
+
+
 void Execute_MoveForward(void);
 void Execute_MoveBack(void);
 void Execute_MoveLeft(void);

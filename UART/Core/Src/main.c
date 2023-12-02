@@ -1,4 +1,4 @@
-#include "main.h"
+ #include "main.h"
 #include "program.h"
 
 
@@ -100,21 +100,25 @@ int main(void)
 
  	   	        case Message_RotateBaseLeft: //E
  	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseLeft,String_Bufforsize,UART_Timeout);
+ 	   	        	Execute_RotateBaseLeft();
  	   	        	Message=0;
  	   	            break;
 
  	   	        case Message_RotateBaseRight: //F
  	   	        	HAL_UART_Transmit(&huart2,&String_RotateBaseRight,String_Bufforsize,UART_Timeout);
+ 	   	        	Execute_RotateBaseRight();
  	   	        	Message=0;
  	   	            break;
 
  	   	        case Message_FirstArmUp: //G
  	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmUp ,String_Bufforsize,UART_Timeout);
+ 	   	        	Execute_FirstArmUp();
  	   	        	Message=0;
  	   	            break;
 
  	   	        case Message_FirstArmDown: //H
  	   	        	HAL_UART_Transmit(&huart2,&String_FirstArmDown,String_Bufforsize,UART_Timeout);
+ 	   	        	Execute_FirstArmDown();
  	   	        	Message=0;
  	   	            break;
 

@@ -1,18 +1,37 @@
-//		*PT8A993A*
-//								_	_	_
-//				1	-|							|-	24
-//	(GND)		2	-|							|-	23
-//				3	-|							|-	22
-//				4	-|							|-	21	(VCC)
-//				5	-|							|-	20	(SecondArm)
-//	(MotorLeft)	6	-|(D5:PB6)					|-	19	(FirstArm)
-//	(MotorBase)	7	-|							|-	18	(FirstArm)
-//	(MotorLeft)	8	-|(D7:PF0)					|-	17
-//	(MotorBase)	9	-|							|-	16
-//				10	-|							|-	15	(SecondArm)
-//				11	-|							|-	14
-//	(MotorRight)12	-|(D11:PB5)			(A0:PA0)|-	13	(MotorRight)
-//								_	_	_
+
+
+
+//	(MotorLeft)		-|(D5:PB6)
+//	(MotorLeft)		-|(D7:PF0)
+//	(MotorRight)	-|(D11:PB5)
+//  (MotorRight)    -|(A0:PA0)
+//	(MotorBase)		-|(D3:PB0)
+//	(MotorBase)		-|(D6:PB1)
+//  (MotorFirstArm) -|(D1:PA9)
+//  (MotorFirstArm) -|(D0:PA10)
+
+
+#define MotorLeftA_GPIO 		 GPIOB				//PB6
+#define MotorLeftA_PIN  		 GPIO_PIN_6
+#define MotorLeftB_GPIO 		 GPIOF				//PF0
+#define MotorLeftB_PIN  		 GPIO_PIN_0
+
+#define MotorRightA_GPIO 		GPIOB				//PB5
+#define MotorRightA_PIN  		GPIO_PIN_5
+#define MotorRightB_GPIO 		GPIOA				//PA0
+#define MotorRightB_PIN  		GPIO_PIN_0
+
+#define MotorBaseA_GPIO  		GPIOB				//PB0
+#define MotorBaseA_PIN 	 		GPIO_PIN_0
+#define MotorBaseB_GPIO  		GPIOB				//PB1
+#define MotorBaseB_PIN  		GPIO_PIN_1
+
+#define MotorFirstArmA_GPIO 	GPIOA			//PA9
+#define MotorFirstArmA_PIN 		GPIO_PIN_9
+#define MotorFirstArmB_GPIO 	GPIOA				//PA10
+#define MotorFirstArmB_PIN  	GPIO_PIN_10
+
+
 
 
 
@@ -21,8 +40,6 @@ void Motor_LeftForward(void);
 void Motor_LeftBack(void);
 void Motor_RightForward(void);
 void Motor_RightBack(void);
-
-
 void Execute_MoveForward(void);
 void Execute_MoveBack(void);
 void Execute_MoveLeft(void);
